@@ -47,10 +47,9 @@ All output must be written to text files (one file per core). Each line must tak
     xk<=x<xk+1 ; yi=c0+c1x ; type
 
 where
-
-    - _x_ <sub> _k_ </sub> and _x<sub>k+1</sub>_ are the domain in which *y_k* is applicable
-    - *y_k* is the k^th function
-    - *type* is either *least-squares* or *interpolation*
+   - __x__ <sub> _k_ </sub> and _x<sub>k+1</sub>_ are the domain in which *y_k* is applicable
+   - *y_k* is the k^th function
+   - *type* is either *least-squares* or *interpolation*
 
 For the example data in described in Section 2.1 (Input Format) you would generate 4 output files.
 
