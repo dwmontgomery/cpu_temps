@@ -48,7 +48,7 @@ All output must be written to text files (one file per core). Each line must tak
 
 where
 
-    - *x_k* and *x_{k+1}* are the domain in which *y_k* is applicable
+    - _x<sub>k</sub>_ and _x<sub>k+1</sub>_ are the domain in which *y_k* is applicable
     - *y_k* is the k^th function
     - *type* is either *least-squares* or *interpolation*
 
