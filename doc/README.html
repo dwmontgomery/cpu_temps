@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>CS417 Semester Project</title>
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+    <h1 class="title">CS417 Semester Project</h1>
+    <nav id="rustdoc"><ul>
+<li><a href="#requirements" title="Requirements">0.1 Requirements</a><ul></ul></li>
+<li><a href="#purpose" title="Purpose">0.2 Purpose</a><ul></ul></li>
+<li><a href="#input-format" title="Input Format">0.3 Input Format</a><ul></ul></li>
+<li><a href="#output-format" title="Output Format">0.4 Output Format</a><ul></ul></li>
+<li><a href="#sample-execution-and-output" title="Sample Execution and Output">0.5 Sample Execution and Output</a><ul>
+<li><a href="#sample-execution" title="Sample Execution">0.5.1 Sample Execution</a><ul></ul></li>
+<li><a href="#sample-output" title="Sample Output">0.5.2 Sample Output</a><ul></ul></li></ul></li></ul></nav><p>Author: Dylan Montgomery</p>
+<h2 id="requirements"><a class="doc-anchor" href="#requirements">§</a>0.1 Requirements</h2>
+<p>This program is written in Rust using Cargo for build management.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>* Rust <span class="number">1.84</span>.<span class="number">0</span></code></pre></div>
+<h2 id="purpose"><a class="doc-anchor" href="#purpose">§</a>0.2 Purpose</h2>
+<p>The purpose of this program is to analyze the temperatures of a four-core CPU running over a period of time.</p>
+<h2 id="input-format"><a class="doc-anchor" href="#input-format">§</a>0.3 Input Format</h2>
+<p>Data input takes the form of temperatures in a txt file. All data points are whitespace delimited. The input can be expected one of two ways:</p>
+<p>with labels, such as,</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>+<span class="number">61.0</span>°C +<span class="number">63.0</span>°C +<span class="number">50.0</span>°C +<span class="number">58.0</span>°C
++<span class="number">80.0</span>°C +<span class="number">81.0</span>°C +<span class="number">68.0</span>°C +<span class="number">77.0</span>°C
++<span class="number">62.0</span>°C +<span class="number">63.0</span>°C +<span class="number">52.0</span>°C +<span class="number">60.0</span>°C
++<span class="number">83.0</span>°C +<span class="number">82.0</span>°C +<span class="number">70.0</span>°C +<span class="number">79.0</span>°C
++<span class="number">68.0</span>°C +<span class="number">69.0</span>°C +<span class="number">58.0</span>°C +<span class="number">65.0</span>°C</code></pre></div>
+<p>or without lables, such as,</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="number">61.0 63.0 50.0 58.0
+80.0 81.0 68.0 77.0
+62.0 63.0 52.0 60.0
+83.0 82.0 70.0 79.0
+68.0 69.0 58.0 65.0</span></code></pre></div>
+<p>Each line represents temperature readings from 4 processor cores. Readings are taken every 30 seconds. In this example:</p>
+<blockquote>
+<p>line 1 is 0 sec<br />
+line 2 is 30 sec,<br />
+line 3 is 60 sec.<br />
+line 4 is 90 sec.<br />
+line 5 is 120 sec.</p>
+</blockquote>
+<h2 id="output-format"><a class="doc-anchor" href="#output-format">§</a>0.4 Output Format</h2>
+<p>All output must be written to text files (one file per core). Each line must take the form:</p>
+<blockquote>
+<p><em>x<sub>k</sub></em> &lt;= <em>x</em> &lt; <em>x<sub>k+1</sub></em> ; <em>y<sub>i</sub></em> = <em>c<sub>0</sub></em>+<em>c<sub>1</sub>x</em> ; <em>type</em></p>
+</blockquote>
+<p>where</p>
+<ul>
+<li><em>x<sub>k</sub></em> and <em>x<sub>k+1</sub></em> are the domain in which <em>y<sub>k</sub></em> is applicable</li>
+<li><em>y<sub>k</sub></em> is the k<sup>th</sup> function</li>
+<li><em>type</em> is either <em>least-squares</em> or <em>interpolation</em></li>
+</ul>
+<p>For the example data in described in Section 2.1 (Input Format) you would generate 4 output files.</p>
+<ul>
+<li>{basename}-core-0.{txt}</li>
+<li>{basename}-core-1.{txt}</li>
+<li>{basename}-core-2.{txt}</li>
+<li>{basename}-core-3.{txt}</li>
+</ul>
+<p>where {basename} is the input file name without the extension (e.g., without the .txt or .dat).</p>
+<h2 id="sample-execution-and-output"><a class="doc-anchor" href="#sample-execution-and-output">§</a>0.5 Sample Execution and Output</h2><h3 id="sample-execution"><a class="doc-anchor" href="#sample-execution">§</a>0.5.1 Sample Execution</h3>
+<p>The program can be run using the command</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>&lt;to be added&gt;</code></pre></div>
+<p>If run without a command line argument, such as</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>&lt;to be added&gt;</code></pre></div>
+<p>the following will be displayed</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>&lt;to be added&gt;</code></pre></div>
+<h3 id="sample-output"><a class="doc-anchor" href="#sample-output">§</a>0.5.2 Sample Output</h3>
+<p>If run using a command line argument, such as</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>&lt;to be added&gt; &lt;filename.txt&gt;</code></pre></div>
+<p>with a sample input file similar to the following, where each column
+represents a single core of a CPU:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="number">61.0 63.0 50.0 58.0
+80.0 81.0 68.0 77.0
+62.0 63.0 52.0 60.0
+83.0 82.0 70.0 79.0
+68.0 69.0 58.0 65.0</span></code></pre></div>
+<p>The output file should be similar to the following:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="number">0 </span>&lt;= x &lt;=       <span class="number">30 </span>; y =        <span class="number">61.0000 </span>+       <span class="number">0.6333 </span>x ; interpolation
+<span class="number">30 </span>&lt;= x &lt;=      <span class="number">60 </span>; y =        <span class="number">98.0000 </span>+       -<span class="number">0.6000 </span>x ; interpolation
+<span class="number">60 </span>&lt;= x &lt;=      <span class="number">90 </span>; y =        <span class="number">20.0000 </span>+       <span class="number">0.7000 </span>x ; interpolation
+<span class="number">90 </span>&lt;= x &lt;=      <span class="number">120 </span>; y =       <span class="number">128.0000 </span>+      -<span class="number">0.5000 </span>x ; interpolation
+<span class="number">0 </span>&lt;= x &lt;=       <span class="number">120 </span>; y =       <span class="number">67.4000 </span>+       <span class="number">0.0567 </span>x ; least-squares</code></pre></div>
+<p>Note that the above sample output file is for a single core. There will be three similar
+outputs files for the other remaining cores.</p>
+
+    
+</body>
+</html>

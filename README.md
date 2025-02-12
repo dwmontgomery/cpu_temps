@@ -33,22 +33,22 @@ or without lables, such as,
 
 Each line represents temperature readings from 4 processor cores. Readings are taken every 30 seconds. In this example:
 
-    line 1 is 0 sec
-    line 2 is 30 sec,
-    line 3 is 60 sec.
-    line 4 is 90 sec.
-    line 5 is 120 sec.
+> line 1 is 0 sec  
+> line 2 is 30 sec,  
+> line 3 is 60 sec.  
+> line 4 is 90 sec.  
+> line 5 is 120 sec.  
 
 
 ## Output Format
 
 All output must be written to text files (one file per core). Each line must take the form:
 
-    xk<=x<xk+1 ; yi=c0+c1x ; type
+> *x<sub>k</sub>* <= *x* < *x<sub>k+1</sub>* ; *y<sub>i</sub>* = *c<sub>0</sub>*+*c<sub>1</sub>x* ; _type_
 
 where
-   - __x__ <sub> _k_ </sub> and _x<sub>k+1</sub>_ are the domain in which *y_k* is applicable
-   - *y_k* is the k^th function
+   - *x<sub>k</sub>* and *x<sub>k+1</sub>* are the domain in which *y<sub>k</sub>* is applicable
+   - *y<sub>k</sub>* is the k<sup>th</sup> function
    - *type* is either *least-squares* or *interpolation*
 
 For the example data in described in Section 2.1 (Input Format) you would generate 4 output files.
