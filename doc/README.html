@@ -25,7 +25,9 @@
 <li><a href="#input-format" title="Input Format">0.3 Input Format</a><ul></ul></li>
 <li><a href="#output-format" title="Output Format">0.4 Output Format</a><ul></ul></li>
 <li><a href="#sample-execution-and-output" title="Sample Execution and Output">0.5 Sample Execution and Output</a><ul>
-<li><a href="#sample-execution" title="Sample Execution">0.5.1 Sample Execution</a><ul></ul></li>
+<li><a href="#sample-execution" title="Sample Execution">0.5.1 Sample Execution</a><ul>
+<li><a href="#building-the-program" title="Building the program">0.5.1.1 Building the program</a><ul></ul></li>
+<li><a href="#running-the-program" title="Running the program">0.5.1.2 Running the program</a><ul></ul></li></ul></li>
 <li><a href="#sample-output" title="Sample Output">0.5.2 Sample Output</a><ul></ul></li></ul></li></ul></nav><p>Author: Dylan Montgomery</p>
 <h2 id="requirements"><a class="doc-anchor" href="#requirements">§</a>0.1 Requirements</h2>
 <p>This program is written in Rust using Cargo for build management.</p>
@@ -60,7 +62,7 @@ line 5 is 120 sec.</p>
 <h2 id="output-format"><a class="doc-anchor" href="#output-format">§</a>0.4 Output Format</h2>
 <p>All output must be written to text files (one file per core). Each line must take the form:</p>
 <blockquote>
-<p><em>x<sub>k</sub></em> &lt;= <em>x</em> &lt; <em>x<sub>k+1</sub></em> ; <em>y<sub>i</sub></em> = <em>c<sub>0</sub></em>+<em>c<sub>1</sub>x</em> ; <em>type</em></p>
+<p><em>x<sub>k</sub></em> &lt;=    <em>x</em> &lt; <em>x<sub>k+1</sub></em> ; <em>y<sub>i</sub></em> = <em>c<sub>0</sub></em>+<em>c<sub>1</sub>x</em> ; <em>type</em></p>
 </blockquote>
 <p>where</p>
 <ul>
@@ -76,20 +78,30 @@ line 5 is 120 sec.</p>
 <li>{basename}-core-3.{txt}</li>
 </ul>
 <p>where {basename} is the input file name without the extension (e.g., without the .txt or .dat).</p>
-<h2 id="sample-execution-and-output"><a class="doc-anchor" href="#sample-execution-and-output">§</a>0.5 Sample Execution and Output</h2><h3 id="sample-execution"><a class="doc-anchor" href="#sample-execution">§</a>0.5.1 Sample Execution</h3>
+<h2 id="sample-execution-and-output"><a class="doc-anchor" href="#sample-execution-and-output">§</a>0.5 Sample Execution and Output</h2><h3 id="sample-execution"><a class="doc-anchor" href="#sample-execution">§</a>0.5.1 Sample Execution</h3><h4 id="building-the-program"><a class="doc-anchor" href="#building-the-program">§</a>0.5.1.1 Building the program</h4>
+<p>The program can be built using Cargo by running the following command</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>cargo build</code></pre></div>
+<h4 id="running-the-program"><a class="doc-anchor" href="#running-the-program">§</a>0.5.1.2 Running the program</h4>
 <p>The program can be run using the command</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code>&lt;to be added&gt;</code></pre></div>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>./target/release/cpu_temps <span class="string">"./input/file/path.txt"</span></code></pre></div>
+<p>or can be run using Cargo. To run using Cargo, use the command</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>cargo run -- <span class="string">"./input/file/path.txt"</span></code></pre></div>
 <p>If run without a command line argument, such as</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code>&lt;to be added&gt;</code></pre></div>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>./target/release/cpu_temps</code></pre></div>
 <p>the following will be displayed</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code>&lt;to be added&gt;</code></pre></div>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>invalid command line argument: expected ./target/releaase/cpu_temps &lt;input_file_path&gt;</code></pre></div>
+<p>A similar error will also be displayed if any input file other than a .txt file is used.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>invalid input file <span class="kw">type</span>: expected &lt;file&gt;.txt</code></pre></div>
 <h3 id="sample-output"><a class="doc-anchor" href="#sample-output">§</a>0.5.2 Sample Output</h3>
 <p>If run using a command line argument, such as</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code>&lt;to be added&gt; &lt;filename.txt&gt;</code></pre></div>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>./target/release/cpu_temps <span class="string">"sample_input.txt"</span></code></pre></div>
 <p>with a sample input file similar to the following, where each column
 represents a single core of a CPU:</p>
 
@@ -107,6 +119,7 @@ represents a single core of a CPU:</p>
 <span class="number">0 </span>&lt;= x &lt;=       <span class="number">120 </span>; y =       <span class="number">67.4000 </span>+       <span class="number">0.0567 </span>x ; least-squares</code></pre></div>
 <p>Note that the above sample output file is for a single core. There will be three similar
 outputs files for the other remaining cores.</p>
+<p>Output files are saved to the /output directory. If the directory does not exist, then it is created.</p>
 
     
 </body>

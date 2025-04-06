@@ -1,9 +1,13 @@
-pub mod piecewise_linear;
+pub mod temperature_analyzer;
+pub mod output;
 
 use std::env;
 use std::process;
+use std::path::Path;
 use temperature_parser::read_temperature_file;
-use piecewise_linear::Points;
+use temperature_analyzer::Points;
+use output::write_temps;
+
 
 fn main() {
     
@@ -22,6 +26,7 @@ fn main() {
         process::exit(1);
     }
 
+    // Read the data from the input file
     let temp_data = match read_temperature_file(&args[1]) {
         Ok(data) => data,
         Err(e) => {
@@ -37,6 +42,7 @@ fn main() {
     let mut readings_core_2: Vec<f64> = vec![];
     let mut readings_core_3: Vec<f64> = vec![];
 
+    // Push the data from the read data to the respective core vectors
     for line in temp_data {
         times.push(line.time_step as f64);
         readings_core_0.push(line.readings[0]);
@@ -46,33 +52,57 @@ fn main() {
     }
 
 
-    // Create Points structs for each core
-    let core_0_points = Points::new(times.clone(), readings_core_0);
-    let core_1_points = Points::new(times.clone(), readings_core_1);
-    let core_2_points = Points::new(times.clone(), readings_core_2);
-    let core_3_points = Points::new(times.clone(), readings_core_3);
+    // Create Points structs for each core using the input data for the core and 
+    // the time vector
+    let mut core_0_points = Points::new(times.clone(), readings_core_0);
+    let mut core_1_points = Points::new(times.clone(), readings_core_1);
+    let mut core_2_points = Points::new(times.clone(), readings_core_2);
+    let mut core_3_points = Points::new(times.clone(), readings_core_3);
 
-    // Interpolate the data for each core
-    let mut core_0_points = core_0_points;
-    let mut core_1_points = core_1_points;
-    let mut core_2_points = core_2_points;
-    let mut core_3_points = core_3_points;
-
+    // Calculate the values for the linear interpolation
     core_0_points.interpolate();
     core_1_points.interpolate();
     core_2_points.interpolate();
     core_3_points.interpolate();
 
-    // Optionally print out the interpolated values for each core
-    println!("Core0");
-    core_0_points.print();
+    // Calculate the values for the least squares approximation
+    core_0_points.least_squares();
+    core_1_points.least_squares();
+    core_2_points.least_squares();
+    core_3_points.least_squares();
 
-    println!("Core1");
-    core_1_points.print();
+    // Check if the output directory exists. If not, create it
+    let output_dir = "./output";
+    if !Path::new(output_dir).exists() {
+        std::fs::create_dir_all(output_dir).expect("Failed to create output directory");
+    }
 
-    println!("Core2");
-    core_2_points.print();
+    // Retreive the base file name from the input file and format the file path
+    let basename = Path::new(&args[1])
+        .file_stem() 
+        .and_then(|s| s.to_str())
+        .unwrap_or("");
 
-    println!("Core3");
-    core_3_points.print();
+    let filename0 = format!("./output/{}-core-0.txt", basename);
+    let filename1 = format!("./output/{}-core-1.txt", basename);
+    let filename2 = format!("./output/{}-core-2.txt", basename);
+    let filename3 = format!("./output/{}-core-3.txt", basename);
+
+
+    // Write the data to the output files in the output directory
+    if let Err(e) = write_temps(&core_0_points, &filename0) {
+        eprintln!("Error writing file: {}", e);
+    }
+
+    if let Err(e) = write_temps(&core_1_points, &filename1) {
+        eprintln!("Error writing file: {}", e);
+    }    
+
+    if let Err(e) = write_temps(&core_2_points, &filename2) {
+        eprintln!("Error writing file: {}", e);
+    }
+
+    if let Err(e) = write_temps(&core_3_points, &filename3) {
+        eprintln!("Error writing file: {}", e);
+    }
 }

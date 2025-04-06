@@ -44,7 +44,7 @@ Each line represents temperature readings from 4 processor cores. Readings are t
 
 All output must be written to text files (one file per core). Each line must take the form:
 
-> *x<sub>k</sub>* <= *x* < *x<sub>k+1</sub>* ; *y<sub>i</sub>* = *c<sub>0</sub>*+*c<sub>1</sub>x* ; _type_
+> *x<sub>k</sub>* <=    *x* < *x<sub>k+1</sub>* ; *y<sub>i</sub>* = *c<sub>0</sub>*+*c<sub>1</sub>x* ; _type_
 
 where
    - *x<sub>k</sub>* and *x<sub>k+1</sub>* are the domain in which *y<sub>k</sub>* is applicable
@@ -65,23 +65,40 @@ where {basename} is the input file name without the extension (e.g., without the
 
 ### Sample Execution
 
+#### Building the program 
+
+The program can be built using Cargo by running the following command
+
+    cargo build
+
+#### Running the program
+
 The program can be run using the command
 
-    <to be added>
+    ./target/release/cpu_temps "./input/file/path.txt"
+
+or can be run using Cargo. To run using Cargo, use the command
+
+    cargo run -- "./input/file/path.txt"
 
 If run without a command line argument, such as 
 
-    <to be added>
+    ./target/release/cpu_temps
 
 the following will be displayed
 
-    <to be added>
+    invalid command line argument: expected ./target/releaase/cpu_temps <input_file_path>
+
+A similar error will also be displayed if any input file other than a .txt file is used. 
+
+    invalid input file type: expected <file>.txt
+
 
 ### Sample Output
 
 If run using a command line argument, such as 
 
-    <to be added> <filename.txt>
+    ./target/release/cpu_temps "sample_input.txt"
 
 with a sample input file similar to the following, where each column 
 represents a single core of a CPU:
@@ -102,3 +119,5 @@ The output file should be similar to the following:
 
 Note that the above sample output file is for a single core. There will be three similar 
 outputs files for the other remaining cores. 
+
+Output files are saved to the /output directory. If the directory does not exist, then it is created. 
